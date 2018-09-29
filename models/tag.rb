@@ -13,17 +13,22 @@ class Tag
   end
 
   def save()
-    sql = "INSERT INTO tags (title) VALUES ($1) RETURNING id"
-    values = [@title]
+    sql = "INSERT INTO tags (
+    title,
+    budget
+    ) VALUES ($1, $2) RETURNING id"
+    values = [@title, @budget]
     result = SqlRunner.run(sql, values)
     @id = result[0]["id"].to_i
   end
 
   def update()
-    sql = "UPDATE tags SET title = $1 WHERE id = $2"
-    values = [@title, @id]
+    sql = "UPDATE tags SET (
+    title,
+    budget) =
+    ( $1, $2 ) WHERE id = $3"
+    values = [@title, @budget, @id]
     results = SqlRunner.run(sql, values)
-    return Tag.new(results[0])
   end
 
   def delete()

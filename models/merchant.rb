@@ -23,7 +23,6 @@ class Merchant
     sql = "UPDATE merchants SET name = $1 WHERE id = $2"
     values = [@name, @id]
     results = SqlRunner.run(sql, values)
-    return Merchant.new(results[0])
   end
 
   def delete()

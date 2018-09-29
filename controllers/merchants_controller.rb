@@ -21,6 +21,8 @@ get '/merchants/:id' do
 end
 
 get '/merchants/:id/edit' do
+    @transactions = Transaction.all
+    @tags = Tag.all
     @merchant = Merchant.find(params['id'])
     erb(:"merchants/edit")
 
